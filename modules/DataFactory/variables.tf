@@ -1,7 +1,10 @@
 variable "data_factory_name" {
   type = string
   description = "The name of the data factory."
-  default = "DevDataFactory"
+  validation {
+    condition = var.data_factory_name != null && length(var.data_factory_name) > 0
+    error_message = "The data factory name cannot be an empty string."
+  }
 }
 
 
