@@ -4,8 +4,15 @@ locals {
     "Goodbye, World!"
   ]
 }
-module "this" {
-  source   = "../modules/this"
-  for_each = { for k, v in local.these : k => v }
-  in       = each.value
+
+resource "azurerm_resource_group" "DevRG" {
+  name     = "DevRG"
+  location = "East US"
+}
+module "DataFactory" {
+  source   = "../modules/DataFactory"
+  location = azurerm_resource_group.DevRG.location
+  resource_group_name = azurerm_resource_group.DevRG.name
+  data_factory_name = "DevDataFactory"
+
 }
