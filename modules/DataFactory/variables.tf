@@ -1,4 +1,4 @@
-variable "data_factory_name" {
+variable "name" {
   type = string
   description = "The name of the data factory."
   validation {
@@ -8,7 +8,7 @@ variable "data_factory_name" {
 }
 
 
-variable "resource_group_name" {
+variable "rg_name" {
   type = string
   description = "The name of the resource group in which the data factory will be created."
   default = "DevRG"
