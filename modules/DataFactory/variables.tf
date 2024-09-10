@@ -2,7 +2,7 @@ variable "name" {
   type = string
   description = "The name of the data factory."
   validation {
-    condition = var.data_factory_name != null && length(var.data_factory_name) > 0
+    condition = var.name != null && length(var.name) > 0
     error_message = "The data factory name cannot be an empty string."
   }
 }
