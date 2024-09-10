@@ -26,7 +26,7 @@ module "keyvault" {
   ]
 }
 
-module "LogAnalyticsWorkspace" {
+module "LogAnalyticsWorkspace"  {
   source              = "../modules/LogAnalyticsWorkspace"
   location            = azurerm_resource_group.DevRG.location
   resource_group_name = azurerm_resource_group.DevRG.name
@@ -36,6 +36,19 @@ module "LogAnalyticsWorkspace" {
   depends_on = [
     azurerm_resource_group.DevRG
   ]
+}
+
+module "azurerm_application_insights" {
+  source             = "../modules/ApplicationInsights"
+  application_type    = "web"
+  location            = azurerm_resource_group.DevRG.location
+  name                = "kmblkaisfunctest2"
+  resource_group_name = azurerm_resource_group.DevRG.name
+  sampling_percentage = 0
+  workspace_id = "/subscriptions/5c13d4b2-5e84-4b41-b3be-322baf8980f2/resourceGroups/Dev_RG/providers/Microsoft.OperationalInsights/workspaces/kmblklogtest2"
+  # depends_on = [
+  #   azurerm_log_analytics_workspace.loganalytics,
+  # ]
 }
 
 # module "DataFactory" {
