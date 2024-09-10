@@ -22,10 +22,9 @@ variable "purge_protection_enabled" {
   default     = true
 }
 
-variable "rg_name" {
+variable "resource_group_name" {
   description = "The name of the resource group"
   type        = string
-  default     = "blktest"
 }
 
 variable "sku_name" {
