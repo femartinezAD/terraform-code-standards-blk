@@ -21,6 +21,13 @@ module "keyvault" {
   sku_name                   = "premium"
   soft_delete_retention_days = 7
   tenant_id                  = "16b3c013-d300-468d-ac64-7eda0820b6d3"
+  cognitiveSecretkey_name = "cognitiveServicesKey"
+  storageAccountKey_name = "storageAccountKey"
+  storageConnectionString_name = "storageConnectionString"
+  languageKey_name = "languageKey"
+  tags = {
+    tagName = "GAIA-KM"
+  }
   depends_on = [
     azurerm_resource_group.DevRG
   ]

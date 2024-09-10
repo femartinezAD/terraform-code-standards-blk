@@ -51,3 +51,27 @@ variable "tenant_id" {
   description = "The tenant ID for the Key Vault"
   type        = string
 }
+
+variable "cognitiveSecretkey_name" {
+  description = "Name of the secret to store the Cognitive Services key"
+  type        = string
+  #default     = "cognitiveServicesKey"
+}
+
+variable "storageAccountKey_name" {
+  description = "Name of the secret to store the Storage Account key"
+  type        = string
+  #default     = "storageAccountKey"
+}
+
+variable "storageConnectionString_name" {
+  description = "Name of the secret to store the Storage Account connection string"
+  type        = string
+  # default     = "storageConnectionString"
+}
+
+variable "languageKey_name" {
+  description = "Name of the secret to store the Cognitive Services Language key"
+  type        = string
+  default     = "cogSvcLanguageKey"
+}
