@@ -62,10 +62,29 @@ module "cognitiveServices" {
   source                = "../modules/CognitiveServices"
   custom_subdomain_name = "kmblkaoaitest"
   kind                  = "OpenAI"
-  location              = "eastus"
+  location              = azurerm_resource_group.DevRG.location
   name                  = "kmblkaoaitest"
-  resource_group_name   = "blktest"
+  resource_group_name   = azurerm_resource_group.DevRG.name
   sku_name              = "S0"
+  depends_on = [
+    azurerm_resource_group.DevRG
+  ]
+}
+
+
+module "cosmosDB" {
+  source              = "../modules/CosmosDB"
+  location            = azurerm_resource_group.DevRG.location
+  resource_group_name = azurerm_resource_group.DevRG.name
+  name                = "kmblkcosdbtest"
+  offer_type          = "Standard"
+  tags = {
+    tagName = "GAIA-KM"
+  }
+    consistency_level = "Session"
+    failover_priority = 0
+    identity_type = "SystemAssigned"
+    
   depends_on = [
     azurerm_resource_group.DevRG
   ]

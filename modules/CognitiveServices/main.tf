@@ -1,4 +1,4 @@
-resource "azurerm_cognitive_account" "res-1" {
+resource "azurerm_cognitive_account" "OpenAI" {
   custom_subdomain_name = var.custom_subdomain_name
   kind                  = var.kind
   location              = var.location
@@ -23,6 +23,7 @@ resource "azurerm_cognitive_account" "res-1" {
 #     azurerm_resource_group.res-0,
 #   ]
 # }
+
 # resource "azurerm_cognitive_account" "res-7" {
 #   kind                = "TextAnalytics"
 #   location            = "westus"
@@ -51,7 +52,7 @@ resource "azurerm_cognitive_account" "res-1" {
 #     type     = "Standard"
 #   }
 #   depends_on = [
-#     azurerm_cognitive_account.res-1,
+#     azurerm_cognitive_account.OpenAI,
 #   ]
 # }
 # resource "azurerm_cognitive_deployment" "res-3" {
@@ -67,7 +68,7 @@ resource "azurerm_cognitive_account" "res-1" {
 #     type     = "Standard"
 #   }
 #   depends_on = [
-#     azurerm_cognitive_account.res-1,
+#     azurerm_cognitive_account.OpenAI,
 #   ]
 # }
 # resource "azurerm_cognitive_deployment" "res-4" {
@@ -83,7 +84,7 @@ resource "azurerm_cognitive_account" "res-1" {
 #     type     = "Standard"
 #   }
 #   depends_on = [
-#     azurerm_cognitive_account.res-1,
+#     azurerm_cognitive_account.OpenAI,
 #   ]
 # }
 # resource "azurerm_cognitive_deployment" "res-5" {
@@ -99,6 +100,6 @@ resource "azurerm_cognitive_account" "res-1" {
 #     type     = "GlobalStandard"
 #   }
 #   depends_on = [
-#     azurerm_cognitive_account.res-1,
+#     azurerm_cognitive_account.OpenAI,
 #   ]
 # }
