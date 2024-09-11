@@ -12,19 +12,19 @@ resource "azurerm_resource_group" "DevRG" {
 }
 
 module "keyvault" {
-  source                     = "../modules/KeyVault"
-  enable_rbac_authorization  = true
-  location                   = var.location
-  name                       = "kmblkkvttest2"
-  purge_protection_enabled   = true
-  resource_group_name        = azurerm_resource_group.DevRG.name
-  sku_name                   = "premium"
-  soft_delete_retention_days = 7
-  tenant_id                  = "16b3c013-d300-468d-ac64-7eda0820b6d3"
-  cognitiveSecretkey_name = "cognitiveServicesKey"
-  storageAccountKey_name = "storageAccountKey"
+  source                       = "../modules/KeyVault"
+  enable_rbac_authorization    = true
+  location                     = var.location
+  name                         = "kmblkkvttest2"
+  purge_protection_enabled     = true
+  resource_group_name          = azurerm_resource_group.DevRG.name
+  sku_name                     = "premium"
+  soft_delete_retention_days   = 7
+  tenant_id                    = "16b3c013-d300-468d-ac64-7eda0820b6d3"
+  cognitiveSecretkey_name      = "cognitiveServicesKey"
+  storageAccountKey_name       = "storageAccountKey"
   storageConnectionString_name = "storageConnectionString"
-  languageKey_name = "languageKey"
+  languageKey_name             = "languageKey"
   tags = {
     tagName = "GAIA-KM"
   }
@@ -33,7 +33,7 @@ module "keyvault" {
   ]
 }
 
-module "LogAnalyticsWorkspace"  {
+module "LogAnalyticsWorkspace" {
   source              = "../modules/LogAnalyticsWorkspace"
   location            = azurerm_resource_group.DevRG.location
   resource_group_name = azurerm_resource_group.DevRG.name
@@ -46,16 +46,29 @@ module "LogAnalyticsWorkspace"  {
 }
 
 module "azurerm_application_insights" {
-  source             = "../modules/ApplicationInsights"
+  source              = "../modules/ApplicationInsights"
   application_type    = "web"
   location            = azurerm_resource_group.DevRG.location
   name                = "kmblkaisfunctest2"
   resource_group_name = azurerm_resource_group.DevRG.name
   sampling_percentage = 0
-  workspace_id = "/subscriptions/5c13d4b2-5e84-4b41-b3be-322baf8980f2/resourceGroups/Dev_RG/providers/Microsoft.OperationalInsights/workspaces/kmblklogtest2"
+  workspace_id        = "/subscriptions/5c13d4b2-5e84-4b41-b3be-322baf8980f2/resourceGroups/Dev_RG/providers/Microsoft.OperationalInsights/workspaces/kmblklogtest2"
   # depends_on = [
   #   azurerm_log_analytics_workspace.loganalytics,
   # ]
+}
+
+module "cognitiveServices" {
+  source                = "../modules/CognitiveServices"
+  custom_subdomain_name = "kmblkaoaitest"
+  kind                  = "OpenAI"
+  location              = "eastus"
+  name                  = "kmblkaoaitest"
+  resource_group_name   = "blktest"
+  sku_name              = "S0"
+  depends_on = [
+    azurerm_resource_group.DevRG
+  ]
 }
 
 # module "DataFactory" {
