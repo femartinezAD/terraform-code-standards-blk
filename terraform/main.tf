@@ -76,11 +76,26 @@ module "cognitiveServices" {
   text_analytics_sku_name = "S"
   openai_cognitive_account_id =  module.cognitiveServices.openai_cognitive_account_id
   model1_deployment_name = "akm-chat-35"
-  model1_format = "OpenAI"
+  model_format = "OpenAI"
   model1_name = "gpt-35-turbo"
   model1_version = "0613"
   model1_scale_capacity = "20"
   model1_sku = "Standard"
+  model2_deployment_name = "akm-chat-4"
+  model2_name = "gpt-4"
+  model2_version = "0125-Preview"
+  model2_scale_capacity = "20"
+  model2_sku = "Standard"
+  model3_deployment_name = "akm-embeddings"
+  model3_name = "text-embedding-ada-002"
+  model3_version = "2"
+  model3_scale_capacity =  "170"
+  model3_sku = "Standard"
+  model4_deployment_name = "akm-gpt4o"
+  model4_name = "gpt-4o"
+  model4_version = "2024-05-13"
+  model4_scale_capacity =   "70"
+  model4_sku = "Standard"
   depends_on = [
     azurerm_resource_group.DevRG
   ]

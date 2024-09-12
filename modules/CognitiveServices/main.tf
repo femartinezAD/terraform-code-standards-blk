@@ -37,7 +37,7 @@ resource "azurerm_cognitive_deployment" "Model1" {
   cognitive_account_id =  var.openai_cognitive_account_id
   name                 = var.model1_name
   model {
-    format  = var.model1_format
+    format  = var.model_format
     name    = var.model1_name
     version = var.model1_version
   }
@@ -45,54 +45,59 @@ resource "azurerm_cognitive_deployment" "Model1" {
     name = var.model1_sku
     capacity = var.model1_scale_capacity
   }
+    depends_on = [
+    azurerm_cognitive_account.OpenAI,
+  ]
 }
 
 
-# resource "azurerm_cognitive_deployment" "res-3" {
-#   cognitive_account_id = "/subscriptions/b7840bca-7b37-44a4-ac7e-f0568c1d3d85/resourceGroups/blktest/providers/Microsoft.CognitiveServices/accounts/kmblkaoaitest"
-#   name                 = "akm-chat-4"
-#   model {
-#     format  = "OpenAI"
-#     name    = "gpt-4"
-#     version = "0125-Preview"
-#   }
-#   scale {
-#     capacity = 20
-#     type     = "Standard"
-#   }
-#   depends_on = [
-#     azurerm_cognitive_account.OpenAI,
-#   ]
-# }
-# resource "azurerm_cognitive_deployment" "res-4" {
-#   cognitive_account_id = "/subscriptions/b7840bca-7b37-44a4-ac7e-f0568c1d3d85/resourceGroups/blktest/providers/Microsoft.CognitiveServices/accounts/kmblkaoaitest"
-#   name                 = "akm-embeddings"
-#   model {
-#     format  = "OpenAI"
-#     name    = "text-embedding-ada-002"
-#     version = "2"
-#   }
-#   scale {
-#     capacity = 170
-#     type     = "Standard"
-#   }
-#   depends_on = [
-#     azurerm_cognitive_account.OpenAI,
-#   ]
-# }
-# resource "azurerm_cognitive_deployment" "res-5" {
-#   cognitive_account_id = "/subscriptions/b7840bca-7b37-44a4-ac7e-f0568c1d3d85/resourceGroups/blktest/providers/Microsoft.CognitiveServices/accounts/kmblkaoaitest"
-#   name                 = "akm-gpt4o"
-#   model {
-#     format  = "OpenAI"
-#     name    = "gpt-4o"
-#     version = "2024-05-13"
-#   }
-#   scale {
-#     capacity = 70
-#     type     = "GlobalStandard"
-#   }
-#   depends_on = [
-#     azurerm_cognitive_account.OpenAI,
-#   ]
-# }
+resource "azurerm_cognitive_deployment" "Model2" {
+  cognitive_account_id = "/subscriptions/b7840bca-7b37-44a4-ac7e-f0568c1d3d85/resourceGroups/blktest/providers/Microsoft.CognitiveServices/accounts/kmblkaoaitest"
+  name                 = var.model2_deployment_name
+  model {
+    format  = var.model_format
+    name    = var.model2_name
+    version = var.model2_version
+  }    
+  sku {
+    name = var.model2_sku
+    capacity = var.model2_scale_capacity
+  }
+  depends_on = [
+    azurerm_cognitive_account.OpenAI,
+  ]
+}
+
+resource "azurerm_cognitive_deployment" "model3" {
+  cognitive_account_id = var.openai_cognitive_account_id
+  name                 = var.model3_deployment_name
+  model {
+    format  = var.model_format
+    name    = var.model3_name
+    version = var.model3_version
+  }
+  sku {
+    name = var.model3_sku
+    capacity = var.model3_scale_capacity
+  }
+  depends_on = [
+    azurerm_cognitive_account.OpenAI,
+  ]
+}
+
+resource "azurerm_cognitive_deployment" "model4" {
+  cognitive_account_id = var.openai_cognitive_account_id
+  name                 = var.model4_deployment_name
+  model {
+    format  = var.model_format
+    name    = var.model4_version
+    version = "var.model4_version"
+  }
+ sku {
+    name = var.model4_sku
+    capacity = var.model4_scale_capacity
+  }
+  depends_on = [
+    azurerm_cognitive_account.OpenAI,
+  ]
+}
