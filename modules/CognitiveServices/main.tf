@@ -10,51 +10,44 @@ resource "azurerm_cognitive_account" "OpenAI" {
   }
 }
 
-# resource "azurerm_cognitive_account" "res-6" {
-#   kind                = "CognitiveServices"
-#   location            = "westus"
-#   name                = "kmblkcogtest"
-#   resource_group_name = "blktest"
-#   sku_name            = "S0"
-#   tags = {
-#     tagName = "GAIA-KM"
-#   }
-#   depends_on = [
-#     azurerm_resource_group.res-0,
-#   ]
-# }
+resource "azurerm_cognitive_account" "cognitiveServices" {
+  kind                = var.cognitive_kind
+  location            = var.cognitive_location
+  name                = var.cognitive_name
+  resource_group_name = var.resource_group_name
+  sku_name            = var.cognitive_sku_name
+  tags = {
+    tagName = "GAIA-KM"
+  }
+}
 
-# resource "azurerm_cognitive_account" "res-7" {
-#   kind                = "TextAnalytics"
-#   location            = "westus"
-#   name                = "kmblklangtest"
-#   resource_group_name = "blktest"
-#   sku_name            = "S"
-#   tags = {
-#     tagName = "GAIA-KM"
-#   }
-#   depends_on = [
-#     azurerm_resource_group.res-0,
-#   ]
-# }
+resource "azurerm_cognitive_account" "TextAnalytics" {
+  kind                = var.text_analytics_kind
+  location            = var.text_analytics_location
+  name                = var.text_analytics_name
+  resource_group_name = var.resource_group_name
+  sku_name            = var.text_analytics_sku_name
+  tags = {
+    tagName = "GAIA-KM"
+  }
+}
 
 
-# resource "azurerm_cognitive_deployment" "res-2" {
-#   cognitive_account_id = "/subscriptions/b7840bca-7b37-44a4-ac7e-f0568c1d3d85/resourceGroups/blktest/providers/Microsoft.CognitiveServices/accounts/kmblkaoaitest"
-#   name                 = "akm-chat-35"
-#   model {
-#     format  = "OpenAI"
-#     name    = "gpt-35-turbo"
-#     version = "0613"
-#   }
-#   scale {
-#     capacity = 20
-#     type     = "Standard"
-#   }
-#   depends_on = [
-#     azurerm_cognitive_account.OpenAI,
-#   ]
-# }
+resource "azurerm_cognitive_deployment" "Model1" {
+  cognitive_account_id =  var.openai_cognitive_account_id
+  name                 = var.model1_name
+  model {
+    format  = var.model1_format
+    name    = var.model1_name
+    version = var.model1_version
+  }
+    sku {
+    name = var.model1_sku
+    capacity = var.model1_scale_capacity
+  }
+}
+
+
 # resource "azurerm_cognitive_deployment" "res-3" {
 #   cognitive_account_id = "/subscriptions/b7840bca-7b37-44a4-ac7e-f0568c1d3d85/resourceGroups/blktest/providers/Microsoft.CognitiveServices/accounts/kmblkaoaitest"
 #   name                 = "akm-chat-4"

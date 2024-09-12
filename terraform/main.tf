@@ -66,29 +66,44 @@ module "cognitiveServices" {
   name                  = "kmblkaoaitest"
   resource_group_name   = azurerm_resource_group.DevRG.name
   sku_name              = "S0"
+  cognitive_kind = "CognitiveServices"
+  cognitive_location = azurerm_resource_group.DevRG.location
+  cognitive_name = "kmblkcogtest"
+  cognitive_sku_name = "S0"
+  text_analytics_name = "kmblklangtest"
+  text_analytics_location = azurerm_resource_group.DevRG.location
+  text_analytics_kind = "TextAnalytics"
+  text_analytics_sku_name = "S"
+  openai_cognitive_account_id =  module.cognitiveServices.openai_cognitive_account_id
+  model1_deployment_name = "akm-chat-35"
+  model1_format = "OpenAI"
+  model1_name = "gpt-35-turbo"
+  model1_version = "0613"
+  model1_scale_capacity = "20"
+  model1_sku = "Standard"
   depends_on = [
     azurerm_resource_group.DevRG
   ]
 }
 
 
-module "cosmosDB" {
-  source              = "../modules/CosmosDB"
-  location            = azurerm_resource_group.DevRG.location
-  resource_group_name = azurerm_resource_group.DevRG.name
-  name                = "kmblkcosdbtest"
-  offer_type          = "Standard"
-  tags = {
-    tagName = "GAIA-KM"
-  }
-    consistency_level = "Session"
-    failover_priority = 0
-    identity_type = "SystemAssigned"
+# module "cosmosDB" {
+#   source              = "../modules/CosmosDB"
+#   location            = azurerm_resource_group.DevRG.location
+#   resource_group_name = azurerm_resource_group.DevRG.name
+#   name                = "kmblkcosdbtest"
+#   offer_type          = "Standard"
+#   tags = {
+#     tagName = "GAIA-KM"
+#   }
+#     consistency_level = "Session"
+#     failover_priority = 0
+#     identity_type = "SystemAssigned"
     
-  depends_on = [
-    azurerm_resource_group.DevRG
-  ]
-}
+#   depends_on = [
+#     azurerm_resource_group.DevRG
+#   ]
+# }
 
 # module "DataFactory" {
 #   source   = "../modules/DataFactory"
