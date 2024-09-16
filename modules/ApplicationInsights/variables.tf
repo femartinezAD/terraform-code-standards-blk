@@ -39,8 +39,8 @@ variable "sampling_percentage" {
     default     = 0
 }
 
-variable workspace_id {
-    description = "ID of the Log Analytics workspace to link to the Application Insights instance"
+variable "log_analytics_id" {
+    description = "Resource ID of the Log Analytics workspace to link to the Application Insights instance"
     type        = string
 }
 

@@ -7,5 +7,5 @@ resource "azurerm_application_insights" "appinsights" {
   tags = {
     tagName = "GAIA-KM"
   }
-  workspace_id = var.workspace_id
+  workspace_id = var.log_analytics_id
 }
