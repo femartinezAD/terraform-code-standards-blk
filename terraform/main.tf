@@ -102,23 +102,24 @@ module "cognitiveServices" {
 }
 
 
-# module "cosmosDB" {
-#   source              = "../modules/CosmosDB"
-#   location            = azurerm_resource_group.DevRG.location
-#   resource_group_name = azurerm_resource_group.DevRG.name
-#   name                = "kmblkcosdbtest"
-#   offer_type          = "Standard"
-#   tags = {
-#     tagName = "GAIA-KM"
-#   }
-#     consistency_level = "Session"
-#     failover_priority = 0
-#     identity_type = "SystemAssigned"
+module "cosmosDB" {
+  source              = "../modules/CosmosDB"
+  location            = azurerm_resource_group.DevRG.location
+  resource_group_name = azurerm_resource_group.DevRG.name
+  name                = "kmblkcosdbtest"
+  offer_type          = "Standard"
+  
+  tags = {
+    tagName = "GAIA-KM"
+  }
+    consistency_level = "Session"
+    failover_priority = 0
+    identity_type = "SystemAssigned"
     
-#   depends_on = [
-#     azurerm_resource_group.DevRG
-#   ]
-# }
+  depends_on = [
+    azurerm_resource_group.DevRG
+  ]
+}
 
 # module "DataFactory" {
 #   source   = "../modules/DataFactory"

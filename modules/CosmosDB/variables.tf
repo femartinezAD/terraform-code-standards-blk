@@ -55,6 +55,11 @@ variable "container_name" {
     default = "ChatHistories"
 }
 
+variable "container_name2" {
+    type    = string
+    default = "ChatHistories"
+}
+
 variable "partition_key_path" {
     type    = string
     default = "/partitionKey"
