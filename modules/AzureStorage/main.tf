@@ -1,58 +1,40 @@
-# resource "azurerm_storage_account" "blkstorage" {
-#     name                     = var.storage_name
-#     resource_group_name      = var.rg_name
-#     location                 = var.location
-#     account_tier             = var.storage_tier
-#     account_replication_type = var.replication
-# }
+resource "azurerm_storage_account" "storage_account" {
+  account_replication_type         = var.replication
+  account_tier                     = var.storage_tier
+  allow_nested_items_to_be_public  = var.nested_items_public
+  cross_tenant_replication_enabled = var.cross_tenant_replication_enabled
+  is_hns_enabled                   = var.is_hns_enabled
+  location                         = var.location
+  name                             = var.storage_name
+  resource_group_name              = var.resource_group_name
+  tags = {
+    tagName = "GAIA-KM"
+  }
+  identity {
+    type = "SystemAssigned"
+  }
+}
 
-# resource "azurerm_storage_container" "blkcontainer" {
-#     name                  = var.container_name
-#     storage_account_name  = azurerm_storage_account.blkstorage.name
-# }
+resource "azurerm_storage_container" "doc_container" {
+  name                 = var.container_name
+  storage_account_name = var.storage_name
+}
 
-# resource "azurerm_storage_blob" "blob" {
-#     name                   = var.blob_name
-#     storage_account_name   = azurerm_storage_account.blkstorage.name
-#     storage_container_name = azurerm_storage_container.blkcontainer.name
-#     type                   = "Block"
-# }
+resource "azurerm_storage_container" "image_container" {
+  name                 = var.container_name2
+  storage_account_name = var.storage_name
+}
 
-# resource "azurerm_storage_account" "res-610" {
-#   account_replication_type         = "LRS"
-#   account_tier                     = "Standard"
-#   allow_nested_items_to_be_public  = false
-#   cross_tenant_replication_enabled = false
-#   is_hns_enabled                   = true
-#   location                         = "westus"
-#   name                             = "kmblkstdatatest"
-#   resource_group_name              = "blktest"
-#   tags = {
-#     tagName = "GAIA-KM"
-#   }
-#   identity {
-#     type = "SystemAssigned"
-#   }
-#   depends_on = [
-#     azurerm_resource_group.res-0,
-#   ]
-# }
-# resource "azurerm_storage_container" "res-612" {
-#   name                 = "documents"
-#   storage_account_name = "kmblkstdatatest"
-# }
-# resource "azurerm_storage_container" "res-613" {
-#   name                 = "images"
-#   storage_account_name = "kmblkstdatatest"
-# }
-# resource "azurerm_storage_container" "res-614" {
-#   name                 = "metadata"
-#   storage_account_name = "kmblkstdatatest"
-# }
-# resource "azurerm_storage_container" "res-615" {
-#   name                 = "translation"
-#   storage_account_name = "kmblkstdatatest"
-# }
+resource "azurerm_storage_container" "metatdata_container" {
+  name                 = var.container_name3
+  storage_account_name = var.storage_name
+}
+
+resource "azurerm_storage_container" "translation_container" {
+  name                 = var.container_name4
+  storage_account_name = var.storage_name
+}
+
 # resource "azurerm_storage_account" "res-619" {
 #   account_replication_type         = "LRS"
 #   account_tier                     = "Standard"

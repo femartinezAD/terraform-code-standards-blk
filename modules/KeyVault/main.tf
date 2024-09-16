@@ -15,8 +15,8 @@ resource "azurerm_key_vault" "blk-kv" {
 resource "azurerm_key_vault_secret" "cognitiveSecret" {
    name         = var.cognitiveSecretkey_name
   key_vault_id = azurerm_key_vault.blk-kv.id
-  # value = "---"
-  value        = azurerm_cognitive_account.cognitiveServices.primary_access_key
+  value = "---"
+  # value        = azurerm_cognitive_account.cognitiveServices.primary_access_key
   content_type = "string"
 }
 

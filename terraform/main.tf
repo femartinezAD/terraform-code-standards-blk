@@ -108,7 +108,7 @@ module "cosmosDB" {
   resource_group_name = azurerm_resource_group.DevRG.name
   name                = "kmblkcosdbtest"
   offer_type          = "Standard"
-  
+
   tags = {
     tagName = "GAIA-KM"
   }
@@ -121,6 +121,25 @@ module "cosmosDB" {
   ]
 }
 
+module "AzureStorage" {
+  source = "../modules/AzureStorage"
+  location = azurerm_resource_group.DevRG.location
+  resource_group_name = azurerm_resource_group.DevRG.name
+  storage_name = "kmblkstdatatest"
+  storage_tier = "Standard"
+  replication = "LRS"
+  nested_items_public = false
+  cross_tenant_replication_enabled = false
+  is_hns_enabled = true
+  container_name = "documents"
+  container_name2 = "images"
+  container_name3 = "metadatar"
+  container_name4 = "translation"
+    depends_on = [
+    azurerm_resource_group.DevRG,
+  ]
+}
+
 # module "DataFactory" {
 #   source   = "../modules/DataFactory"
 #   name = "AzureDataFactoryBLK"
@@ -128,13 +147,3 @@ module "cosmosDB" {
 #   rg_name = azurerm_resource_group.DevRG.name
 # }
 
-# module "AzureStorage" {
-#   source = "../modules/AzureStorage"
-#   location = azurerm_resource_group.DevRG.location
-#   rg_name = azurerm_resource_group.DevRG.name
-#   storage_name = "blkstorage"
-#   storage_tier = "Standard"
-#   replication = "LRS"
-#   container_name = "blkcontainer"
-#   blob_name = "blob"
-# }
