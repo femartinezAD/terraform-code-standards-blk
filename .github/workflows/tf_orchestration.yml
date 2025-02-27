@@ -19,8 +19,9 @@ on:
         type: string
       gh_environment:
         description: 'GitHub environment'
-        required: true
+        required: false
         type: string
+        default: null
       backend_azure_rm_resource_group_name:
         description: 'Azure Resource Group Name'
         required: true
@@ -44,6 +45,11 @@ on:
         type: string
       var_file:
         description: 'Terraform variables file'
+        required: false
+        default: ''
+        type: string
+      command_option_args:
+        description: 'Terraform command options'
         required: false
         default: ''
         type: string
@@ -75,6 +81,7 @@ jobs:
       backend_azure_rm_key: ${{ inputs.backend_azure_rm_key }}
       plan_file_name: ${{ inputs.plan_file_name }}
       var_file: ${{ inputs.var_file }}
+      command_option_args: ${{ inputs.command_option_args }}
 
   inspect:
     needs: plan
